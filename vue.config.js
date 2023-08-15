@@ -21,6 +21,8 @@ module.exports = {
     },
     publicPath: '',
     chainWebpack: (config) => {
+        config.resolve.alias.set('vue', '@vue/compat')
+        
         config.module
             .rule('lint')
             .test(/lang\.csv$/)
@@ -30,6 +32,19 @@ module.exports = {
             .rule('html')
             .test(/(.)*.(html)$/)
             .use('html-loader')
-            .loader('html-loader');
+            .loader('html-loader')
+            .end()
+            .rule('vue')
+            .use('vue-loader')
+            .tap((options) => {
+              return {
+                ...options,
+                compilerOptions: {
+                  compatConfig: {
+                    MODE: 2
+                  }
+                }
+              }
+            })
     }
 };
