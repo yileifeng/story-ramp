@@ -1,16 +1,6 @@
 <template>
-    <div :id="this.$vnode.key" class="story-slide w-full h-full flex sm:flex-row flex-col">
+    <div :id="$vnode.key" class="story-slide w-full h-full flex sm:flex-row flex-col">
         <Scrollama class="flex-1 order-2 sm:order-1 prose max-w-none my-5">
-            <div class="return-button-container top-16" v-show="activeIdx !== defaultPanel.id">
-                <button class="return-button" @click="clickBack">
-                    <img
-                        style="display: inline; margin: 0px"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAB4UlEQVRIie3WP08WQRAG8J+2SolRQaLyKvR+BTsVaQnfwD9YCH4PS6I2ViAS1GhMKLWESkzUmBAT7azECoS8Fjcvqxe52zuMseBJNpebe2ae2dmdveUA/wiHGnCHcBWXcBqDYf+CT3iOp/j8t5IbwCy20a0ZO3gUie0L4/geQTcxhwmM4EiMkbDNB6eLDYy1Fb2lmEEXj3E2w2cYi9Lsp5qKjofjNm43dcZ0+O9oMPNBqbxtRHuYkcp+MsfhgVTe/WIpYt2rIw4pyrtp7zU9hlW8zhDuRKxtqf3+iJuR4VyF6FpwVjKEKdqri+tVpJdBmqgRXYv3HEyGz4sq0scgnSvZ+/Emvr3D8UxRij7v4n0VaSNIfSX7qvpTqzfKa98n7e5dHG6QeS66bZw+hOP5kr1c6hMNYo7+4reL8ozX43mhZP+Ki3gbgZblb65erPUq0o3Ibn6P723aaSH416pIp6QDZLhCfAWvMkQ72MIPNQcI3I8MFzMC1+FJxJrNIQ9IbTW9D9E7EeObBptxTPqtzbQU7flfaeo8JV0ElhTrVYeOVN4dxdnfCmNS2bcUB/6koqWOxhgN20JweuW93Fa0h37cVezMnMveQxlr2uR6Oyhdb8/4/Xq7rvj7PIv3A/w/+Am/TqGFCMnpPgAAAABJRU5ErkJggg=="
-                    />
-                    {{ $t('dynamic.back') }}
-                </button>
-            </div>
-
             <component
                 :is="config.titleTag || 'h2'"
                 class="px-10 mb-0 chapter-title top-20"
@@ -21,14 +11,37 @@
 
             <div class="px-10 md-content" v-html="md.render(config.content)"></div>
         </Scrollama>
-        <panel
-            class="dynamic-content flex-2"
-            :config="activeConfig"
-            :slideIdx="slideIdx"
-            :dynamicIdx="activeIdx"
-            :ratio="false"
+
+        <div
+            :class="
+                activeConfig.type !== 'text'
+                    ? `sticky ${
+                          activeConfig.type === 'map' ? 'top-16' : 'top-8'
+                      } sm:self-start flex-2 order-1 sm:order-2 z-40 dynamic-content-media sm:flex-col`
+                    : 'flex-2 order-2 sm:order-1 dynamic-content-text'
+            "
         >
-        </panel>
+            <span class="return-button-container top-16" v-show="activeIdx !== defaultPanel.id">
+                <button class="return-button py-1 text-base right-0 absolute" @click="clickBack">
+                    <img
+                        style="display: inline; margin: 0px"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAB4UlEQVRIie3WP08WQRAG8J+2SolRQaLyKvR+BTsVaQnfwD9YCH4PS6I2ViAS1GhMKLWESkzUmBAT7azECoS8Fjcvqxe52zuMseBJNpebe2ae2dmdveUA/wiHGnCHcBWXcBqDYf+CT3iOp/j8t5IbwCy20a0ZO3gUie0L4/geQTcxhwmM4EiMkbDNB6eLDYy1Fb2lmEEXj3E2w2cYi9Lsp5qKjofjNm43dcZ0+O9oMPNBqbxtRHuYkcp+MsfhgVTe/WIpYt2rIw4pyrtp7zU9hlW8zhDuRKxtqf3+iJuR4VyF6FpwVjKEKdqri+tVpJdBmqgRXYv3HEyGz4sq0scgnSvZ+/Emvr3D8UxRij7v4n0VaSNIfSX7qvpTqzfKa98n7e5dHG6QeS66bZw+hOP5kr1c6hMNYo7+4reL8ozX43mhZP+Ki3gbgZblb65erPUq0o3Ibn6P723aaSH416pIp6QDZLhCfAWvMkQ72MIPNQcI3I8MFzMC1+FJxJrNIQ9IbTW9D9E7EeObBptxTPqtzbQU7flfaeo8JV0ElhTrVYeOVN4dxdnfCmNS2bcUB/6koqWOxhgN20JweuW93Fa0h37cVezMnMveQxlr2uR6Oyhdb8/4/Xq7rvj7PIv3A/w/+Am/TqGFCMnpPgAAAABJRU5ErkJggg=="
+                        :alt="$t('dynamic.back')"
+                    />
+                    {{ $t('dynamic.back') }}
+                </button>
+            </span>
+
+            <panel
+                class="flex-2"
+                :config="activeConfig"
+                :slideIdx="slideIdx"
+                :dynamicIdx="activeIdx"
+                :ratio="false"
+                ref="content"
+            >
+            </panel>
+        </div>
     </div>
 </template>
 
@@ -37,7 +50,7 @@ import Scrollama from 'vue-scrollama';
 import MarkdownIt from 'markdown-it';
 
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { DynamicPanel, BasePanel } from '@/definitions';
+import { BasePanel, DynamicPanel } from '@storylines/definitions';
 
 @Component({
     components: {
@@ -59,7 +72,9 @@ export default class DynamicPanelV extends Vue {
     md = new MarkdownIt({ html: true });
 
     mounted(): void {
-        document.querySelectorAll('.storyramp-app a:not([target])').forEach((el: any) => (el.target = '_blank'));
+        document
+            .querySelectorAll('.storyramp-app a:not([target])')
+            .forEach((el: Element) => ((el as HTMLAnchorElement).target = '_blank'));
 
         this.addDynamicURLs();
     }
@@ -69,14 +84,15 @@ export default class DynamicPanelV extends Vue {
      */
     addDynamicURLs(): void {
         // Find all URLs that contain the `panel` attribute.
-        const urls = Array.from(this.$el.querySelectorAll('a[panel]'));
-        urls.forEach((el: any) => {
+        const urls: HTMLAnchorElement[] = Array.from(this.$el.querySelectorAll('a[panel]'));
+        urls.forEach((el: HTMLAnchorElement) => {
             // Find the target panel and add an event listener to the URL.
-            const target = el.attributes['panel'].value;
+            const target = el.attributes.getNamedItem('panel')?.value;
 
             // Change the target to self so clicking the link doesn't open in a new window. Also add a
             // dotted underline to indicate that clicking this link will stay in this window.
-            el.style = 'text-decoration-style: dotted; text-underline-offset: 3px;';
+            el.style.setProperty('text-decoration-style', 'dotted');
+            el.style.setProperty('text-underline-offset', '3px');
             el.href = 'javascript:;';
             el.target = '_self';
 
@@ -97,6 +113,15 @@ export default class DynamicPanelV extends Vue {
                         this.activeConfig = panel.panel;
                         this.activeIdx = panel.id;
                     }, 10);
+
+                    setTimeout(() => {
+                        const elTop = (this.$refs['content'] as Vue).$el.getBoundingClientRect().top;
+                        window.scrollTo({
+                            top: window.pageYOffset + elTop - 63,
+                            left: 0,
+                            behavior: 'smooth'
+                        });
+                    }, 50);
                 }
             };
         });
@@ -106,8 +131,23 @@ export default class DynamicPanelV extends Vue {
      * When clicking the back button, change the panel back to the default (first) panel.
      */
     clickBack(): void {
-        this.activeConfig = this.defaultPanel.panel;
-        this.activeIdx = this.defaultPanel.id;
+        this.activeConfig = {
+            type: 'loading'
+        };
+
+        setTimeout(() => {
+            this.activeConfig = this.defaultPanel.panel;
+            this.activeIdx = this.defaultPanel.id;
+        }, 10);
+
+        setTimeout(() => {
+            const elTop = (this.$refs['content'] as Vue).$el.getBoundingClientRect().top;
+            window.scrollTo({
+                top: window.pageYOffset + elTop - 63,
+                left: 0,
+                behavior: 'smooth'
+            });
+        }, 50);
     }
 }
 </script>
@@ -120,24 +160,38 @@ export default class DynamicPanelV extends Vue {
     pointer-events: none;
 }
 .return-button {
-    padding: 5px;
-    font-size: 20px;
+    float: right;
     pointer-events: auto;
     background: #fff;
     box-shadow: 0px 2px 5px #000;
+    width: 75px;
 }
 .return-button img {
     margin: 0px;
 }
 
 @media screen and (max-width: 640px) {
-    .dynamic-content {
-        max-height: 40vh;
-    }
     .return-button-container {
-        position: static;
-        text-align: center;
+        position: sticky;
+        text-align: right;
         margin-bottom: 10px;
+    }
+
+    .return-button {
+        position: sticky;
+        opacity: 0.7;
+    }
+    .return-button:hover {
+        opacity: 1;
+    }
+
+    .dynamic-content-text {
+        display: flex;
+        flex-direction: column;
+    }
+    .dynamic-content-media {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 </style>

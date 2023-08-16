@@ -1,3 +1,5 @@
+import JSZip from 'jszip';
+
 export interface StoryRampConfig {
     title: string;
     lang: string;
@@ -6,6 +8,21 @@ export interface StoryRampConfig {
     contextLink: string;
     contextLabel: string;
     dateModified: string;
+}
+
+export interface ConfigFileStructure {
+    uuid: string;
+    zip: JSZip;
+    configs: { [key: string]: StoryRampConfig };
+    assets: {
+        [key: string]: JSZip;
+    };
+    charts: {
+        [key: string]: JSZip;
+    };
+    rampConfig: {
+        [key: string]: JSZip;
+    };
 }
 
 export interface DQVOptions {
@@ -26,6 +43,21 @@ export interface SeriesData {
     y?: number;
     data?: number[];
     type?: string;
+}
+
+export interface PieSeriesData {
+    name: string;
+    data: PieDataRow[];
+}
+
+export interface PieDataRow {
+    name: string;
+    y?: number;
+}
+
+export interface LineSeriesData {
+    name: string;
+    data: number[];
 }
 
 export interface DQVChartConfig {
@@ -50,7 +82,7 @@ export interface DQVChartConfig {
         title: {
             text: string;
         };
-        categories: [];
+        categories: (number | string)[];
     };
     data?: {
         csvURL: string;
@@ -64,7 +96,7 @@ export interface DQVChartConfig {
                 menuItems: string[];
             };
         };
-        enabled: boolean;
+        enabled?: boolean;
     };
     series?: SeriesData[] | { data: SeriesData[] };
 }
@@ -101,6 +133,7 @@ export enum PanelType {
 export interface BasePanel {
     type: string;
     width?: number;
+    customStyles?: string; // css string
 }
 
 export interface TextPanel extends BasePanel {
@@ -122,6 +155,7 @@ export interface TimeSliderConfig {
     range: number[];
     start: number[];
     attribute: string;
+    layers?: string[];
 }
 
 export interface DynamicPanel extends BasePanel {
@@ -151,9 +185,13 @@ export interface ImagePanel extends BasePanel {
 
 export interface VideoPanel extends BasePanel {
     type: PanelType.Video;
+    title: string;
+    src: string;
+    videoType: 'local' | 'external' | 'YouTube';
+    thumbnailUrl?: string;
+    transcript?: string;
     width?: number;
     height?: number;
-    src: string;
     caption?: string;
 }
 
@@ -175,25 +213,13 @@ export interface ChartPanel extends BasePanel {
     type: PanelType.Chart;
     charts: ChartConfig[];
     fullscreen?: boolean;
+    loop?: boolean;
 }
 
 export interface ChartConfig {
     src: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    config: any;
+    config?: any;
+    name?: string;
     options?: DQVOptions;
-}
-
-export interface ImageFile {
-    id: string;
-    src: string;
-    altText: string;
-    width?: number;
-    height?: number;
-}
-
-export interface ChartFile {
-    name: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    config: any;
 }

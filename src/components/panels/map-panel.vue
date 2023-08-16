@@ -4,7 +4,11 @@
             {{ config.title }}
         </div>
 
-        <div :id="`ramp-map-${slideIdx}`" class="w-full bg-gray-200 rv-map h-story">
+        <div
+            :id="`ramp-map-${slideIdx}`"
+            class="w-full bg-gray-200 rv-map h-story"
+            :class="config.title ? 'rv-map-title' : 'rv-map'"
+        >
             <div class="flex items-center justify-center w-full h-full map-loading">
                 <svg class="animate-pulse w-52" viewBox="0 0 100 82.202" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -19,11 +23,11 @@
 </template>
 
 <script lang="ts">
-import { MapPanel } from '@/definitions';
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { ConfigFileStructure, MapPanel } from '@storylines/definitions';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
-import TimeSlider from '@/components/panels/helpers/time-slider.vue';
-import Scrollguard from '@/components/panels/helpers/scrollguard.vue';
+import TimeSlider from '@storylines/components/panels/helpers/time-slider.vue';
+import Scrollguard from '@storylines/components/panels/helpers/scrollguard.vue';
 
 @Component({
     components: {}
@@ -32,16 +36,28 @@ export default class MapPanelV extends Vue {
     @Prop() config!: MapPanel;
     @Prop() slideIdx!: number;
     @Prop() lang!: string;
+    @Prop() configFileStructure!: ConfigFileStructure;
 
     intersectTimeoutHandle = -1;
     scrollguardOpen = false;
     mapComponent: Element | undefined = undefined;
 
     mounted(): void {
+        // Check if the config file exists in the ZIP folder first
+        const assetSrc = `${this.config.config.substring(this.config.config.indexOf('/') + 1)}`;
+        if (this.configFileStructure) {
+            const mapFile = this.configFileStructure.zip.file(assetSrc);
+            if (mapFile) {
+                mapFile.async('string').then((res: string) => {
+                    this.config.config = res;
+                });
+            }
+        }
+
         const observer = new IntersectionObserver(
             ([e]) => {
                 if (e.isIntersecting) {
-                    this.intersectTimeoutHandle = setTimeout(() => {
+                    this.intersectTimeoutHandle = window.setTimeout(() => {
                         this.init();
                         observer.disconnect();
                         this.mapComponent?.querySelector('.map-loading')?.remove();
@@ -62,6 +78,7 @@ export default class MapPanelV extends Vue {
 
         new RAMP.Map(this.mapComponent, this.config.config);
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         RAMP.mapAdded.pipe().subscribe(async (mapi: any) => {
             if (this.config.scrollguard && mapi.id === this.mapComponent?.id) {
                 const scrollguardPanel = mapi.panels.create('scrollguard');
@@ -159,11 +176,16 @@ export default class MapPanelV extends Vue {
     width: 100%;
 }
 
+.rv-map-title {
+    height: calc(100vh - 9rem) !important;
+    width: 100%;
+}
+
 .map-title {
     color: #111827;
     font-weight: 700;
     font-size: 1.5em;
-    margin-top: 2em;
+    margin-top: 1em;
     margin-bottom: 1em;
     line-height: 1.3333333;
 }

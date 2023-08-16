@@ -1,5 +1,5 @@
 <template>
-    <div class="time-slider">
+    <div class="time-slider absolute w-full left-0 flex flex-col items-center bg-white">
         <button
             class="absolute top-1 left-4 play-button"
             @click="intervalID >= 0 ? endLoop() : startLoop()"
@@ -59,13 +59,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { TimeSliderConfig } from '@storylines/definitions';
 import noUiSlider, { API, PipsMode } from 'nouislider';
-import { TimeSliderConfig } from '@/definitions';
 
 @Component
 export default class TimeSlider extends Vue {
     @Prop() config!: TimeSliderConfig;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     @Prop() mapi!: any;
 
     minimized = false;
@@ -123,7 +124,20 @@ export default class TimeSlider extends Vue {
                     break;
             }
 
-            this.mapi.layers.allLayers[0].setFilterSql('time_slider', sqlString);
+            if (!this.config.layers || this.config.layers.length === 0) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                this.mapi.layers.allLayers.forEach((layer: any) => {
+                    layer.setFilterSql('time_slider', sqlString);
+                });
+            } else {
+                this.config.layers.forEach((layerId) => {
+                    const layers = this.mapi.layers.getLayersById(layerId);
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    layers.forEach((layer: any) => {
+                        layer.setFilterSql('time_slider', sqlString);
+                    });
+                });
+            }
         });
 
         // to have an element focusable inside the RAMP container, its tabindex must not be 0;
@@ -143,7 +157,7 @@ export default class TimeSlider extends Vue {
             this.slider.set(sliderValues.map(() => sliderValues[0]));
         }
         // delay happens before first call
-        this.intervalID = setInterval(this.moveHandleRight, 1400);
+        this.intervalID = window.setInterval(this.moveHandleRight, 1400);
     }
 
     /**
@@ -187,8 +201,6 @@ export default class TimeSlider extends Vue {
 <style lang="scss">
 .time-slider {
     @import './../../../../node_modules/nouislider/dist/nouislider';
-
-    @apply absolute w-full left-0 flex flex-col items-center bg-white;
 
     height: 150px;
     pointer-events: all;

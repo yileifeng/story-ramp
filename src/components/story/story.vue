@@ -16,8 +16,8 @@
     </div>
 
     <div v-else-if="loadStatus === 'loaded'">
-        <div class="storyramp-app bg-white">
-            <header class="sticky top-0 z-50 w-full h-16 leading-9 bg-white border-b border-gray-200">
+        <div class="storyramp-app bg-white" v-if="config !== undefined">
+            <header class="story-header sticky top-0 w-full h-16 leading-9 bg-white border-b border-gray-200">
                 <div class="flex w-full sm:px-6 py-3 mx-auto">
                     <MobileMenuV
                         class="mobile-menu"
@@ -25,7 +25,7 @@
                         :slides="config.slides"
                         :lang="lang"
                     />
-                    <div class="flex-none font-semibold">
+                    <div class="flex-none w-mobile-full truncate font-semibold">
                         <span class="text-lg">{{ config.title }}</span>
                     </div>
                     <div class="flex justify-end flex-auto space-x-6">
@@ -64,10 +64,10 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Route } from 'vue-router';
 
 import MobileMenuV from './mobile-menu.vue';
-import StoryContentV from '@/components/story/story-content.vue';
-import IntroV from '@/components/story/introduction.vue';
+import StoryContentV from '@storylines/components/story/story-content.vue';
+import IntroV from '@storylines/components/story/introduction.vue';
 
-import { StoryRampConfig } from '@/definitions';
+import { StoryRampConfig } from '@storylines/definitions';
 import Circle2 from 'vue-loading-spinner/src/components/Circle2.vue';
 
 @Component({
@@ -113,7 +113,7 @@ export default class StoryV extends Vue {
     fetchConfig(uid: string, lang: string): void {
         fetch(`${uid}/${uid}_${lang}.json`)
             .then((res) => {
-                res.json().then((config: any) => {
+                res.json().then((config: StoryRampConfig) => {
                     this.config = config;
                     this.loadStatus = 'loaded';
                     // set page title
@@ -176,11 +176,26 @@ $font-list: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     .prose a {
         font-weight: bold;
     }
+
+    .prose a:not([panel]):not([target='_self'])::after {
+        content: url('../../assets/popout.svg');
+    }
+
+    .w-mobile-full {
+        width: 80%;
+    }
+}
+
+.story-header {
+    z-index: 60;
 }
 
 @media screen and (min-width: 640px) {
     .mobile-menu {
         display: none !important;
+    }
+    .w-mobile-full {
+        width: 100% !important;
     }
 }
 </style>
