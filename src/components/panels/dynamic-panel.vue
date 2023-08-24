@@ -1,5 +1,5 @@
 <template>
-    <div :id="$vnode.key" class="story-slide w-full h-full flex sm:flex-row flex-col">
+    <div id="$vnode.key" class="story-slide w-full h-full flex sm:flex-row flex-col">
         <VueScrollama class="flex-1 order-2 sm:order-1 prose max-w-none my-5">
             <component
                 :is="config.titleTag || 'h2'"

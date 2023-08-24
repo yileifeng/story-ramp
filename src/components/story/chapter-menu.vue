@@ -4,14 +4,21 @@
         class="nav-bar sticky self-start w-12 duration-500 ease-in-out transition-width top-16"
     >
         <div class="flex items-center mt-4 mb-12">
-            <tippy to="menu-button-tippy" placement="right" delay="200" v-if="!isMenuOpen">{{
+            <!-- <tippy to="menu-button-tippy" placement="right" delay="200" v-if="!isMenuOpen">{{
                 $t('chapters.title')
-            }}</tippy>
+            }}</tippy> -->
+            <!-- TODO: lost all styling for tooltip during Vue 3 refactor -->
             <button
                 name="menu-button-tippy"
                 class="flex items-center flex-shrink-0 px-2 py-1 mx-1 overflow-hidden"
                 :aria-label="$t('chapters.menu')"
                 @click="isMenuOpen = !isMenuOpen"
+                v-tippy="{
+                    delay: '200',
+                    placement: 'right',
+                    content: $t('chapters.title'),
+                    onShow: () => !isMenuOpen
+                }"
             >
                 <svg
                     class="flex-shrink-0"
@@ -35,11 +42,17 @@
 
         <ul class="nav-content menu">
             <li>
-                <tippy to="menu-options-tippy" delay="200" placement="right">{{ $t('chapters.return') }}</tippy>
+                <!-- <tippy to="menu-options-tippy" delay="200" placement="right">{{ $t('chapters.return') }}</tippy> -->
+                <!-- TODO: lost all styling for tooltip during Vue 3 refactor -->
                 <button
                     :name="`menu-options-tippy`"
                     class="flex items-center px-2 py-1 mx-1"
                     @click="scrollToChapter('intro')"
+                    v-tippy="{
+                        delay: '200',
+                        placement: 'right',
+                        content: $t('chapters.return')
+                    }"
                     v-if="editor"
                 >
                     <svg
@@ -66,6 +79,11 @@
                     :to="{ hash: '#intro' }"
                     class="flex items-center px-2 py-1 mx-1"
                     target
+                    v-tippy="{
+                        delay: '200',
+                        placement: 'right',
+                        content: $t('chapters.return')
+                    }"
                     v-else
                 >
                     <svg
@@ -88,13 +106,19 @@
                 </router-link>
             </li>
             <li v-for="(slide, idx) in slides" :key="idx" :class="{ 'is-active': activeChapterIndex === idx }">
-                <tippy :to="`menu-options-tippy-${idx}`" delay="200" placement="right">{{ slide.title }}</tippy>
+                <!-- <tippy :to="`menu-options-tippy-${idx}`" delay="200" placement="right">{{ slide.title }}</tippy> -->
 
                 <!-- using router-link causes a page refresh which breaks editor preview mode -->
+                <!-- TODO: lost all styling for tooltip during Vue 3 refactor -->
                 <button
                     :name="`menu-options-tippy-${idx}`"
                     class="flex items-center px-2 py-1 mx-1"
                     @click="scrollToChapter(`${idx}-${slide.title.toLowerCase().replaceAll(' ', '-')}`)"
+                    v-tippy="{
+                        delay: '200',
+                        placement: 'right',
+                        content: slide.title
+                    }"
                     v-if="editor"
                 >
                     <svg
@@ -121,6 +145,11 @@
                     :to="{ hash: `#${idx}-${slide.title.toLowerCase().replaceAll(' ', '-')}` }"
                     class="flex items-center px-2 py-1 mx-1"
                     target
+                    v-tippy="{
+                        delay: '200',
+                        placement: 'right',
+                        content: slide.title
+                    }"
                     v-else
                 >
                     <svg
