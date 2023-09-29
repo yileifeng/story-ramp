@@ -202,9 +202,9 @@ const parseCSVFile = (data: CSVFile): void => {
         complete: (res: any) => {
             // construct highcharts objects based on chart type
             if (dqvOptions?.type === 'pie') {
-                makePieChart(res.data, (defaultOptions as unknown) as DQVChartConfig);
+                makePieChart(res.data, defaultOptions as unknown as DQVChartConfig);
             } else {
-                makeLineChart(res.meta.fields, res.data, (defaultOptions as unknown) as DQVChartConfig);
+                makeLineChart(res.meta.fields, res.data, defaultOptions as unknown as DQVChartConfig);
             }
         }
     });
