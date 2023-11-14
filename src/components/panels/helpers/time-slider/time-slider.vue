@@ -131,7 +131,7 @@ onMounted(() => {
         if (!props.config.layers || props.config.layers.length === 0) {
             props.rInstance.geo.layer
                 .allLayers()
-                .filter((l: any) => l.supportsFeatures)
+                .filter((l: any) => l.supportsFeatures && !l.isCosmetic)
                 .forEach((l: any) => {
                     l.setSqlFilter('time_slider', sqlString);
                 });

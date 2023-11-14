@@ -119,7 +119,8 @@
                                 "title": "Overtime job",
                                 "videoType": "local",
                                 "caption": "00000000-0000-0000-0000-000000000000/assets/en/video1-en.mp4.vtt",
-                                "src": "00000000-0000-0000-0000-000000000000/assets/en/video1-en.mp4"
+                                "src": "00000000-0000-0000-0000-000000000000/assets/en/video1-en.mp4",
+                                "transcript": "00000000-0000-0000-0000-000000000000/assets/en/cpts-lg-en.html"
                             }
                         }
                     ]
@@ -140,43 +141,6 @@
                     "videoType": "YouTube",
                     "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
                     "height": 700
-                }
-            ]
-        },
-        {
-            "title": "Video Panel 2",
-            "panel": [
-                {
-                    "title": "Video Test for external source content",
-                    "content": "This is a video demo from the WET media player demo pages.",
-                    "type": "text"
-                },
-                {
-                    "type": "video",
-                    "title": "Overtime job",
-                    "videoType": "external",
-                    "src": "https://wet-boew.github.io/wet-boew-attachments/videos/video1-en.mp4",
-                    "caption": "00000000-0000-0000-0000-000000000000/assets/en/video1-en.mp4.vtt",
-                    "height": 500
-                }
-            ]
-        },
-        {
-            "title": "Video Panel 3",
-            "panel": [
-                {
-                    "title": "Video Test for local source content",
-                    "content": "This is a video demo from local video stored in assets folder.",
-                    "type": "text"
-                },
-                {
-                    "type": "video",
-                    "title": "Overtime job",
-                    "videoType": "local",
-                    "src": "00000000-0000-0000-0000-000000000000/assets/en/video1-en.mp4",
-                    "caption": "00000000-0000-0000-0000-000000000000/assets/en/video1-en.mp4.vtt",
-                    "transcript": "00000000-0000-0000-0000-000000000000/assets/en/cpts-lg-en.html",
-                    "height": 500
                 }
             ]
         },
@@ -531,10 +495,10 @@
             ]
         },
         {
-            "title": "DQV Chart Gallery",
+            "title": "Chart Gallery",
             "panel": [
                 {
-                    "title": "DQV Chart",
+                    "title": "Highcharts Demo (╯°□°)╯︵ ┻━┻",
                     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus, magna in pulvinar tincidunt, magna velit feugiat sem, nec rhoncus lectus tortor quis turpis. Vivamus erat velit, feugiat at nisl lacinia, pulvinar tempus nunc. Nulla suscipit vulputate dapibus. Fusce tincidunt neque nunc, sed porta lacus elementum vitae. Suspendisse imperdiet interdum ipsum, id aliquet lectus aliquet sit amet. Aliquam erat volutpat. Nulla convallis nisl sodales nunc ullamcorper pulvinar. Nulla ornare justo id sapien porta gravida. Cras condimentum, felis id pretium malesuada, lorem lorem viverra nisi, sit amet molestie mi nulla nec velit. Integer semper lorem scelerisque tellus iaculis finibus. Aliquam efficitur sodales elit nec sodales. Sed vitae ipsum quis eros vulputate luctus.",
                     "type": "text"
                 },
