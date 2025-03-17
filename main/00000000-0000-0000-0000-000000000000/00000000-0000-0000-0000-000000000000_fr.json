@@ -32,7 +32,7 @@
                     "type": "text"
                 },
                 {
-                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/fr/OilSandsDeposits.json",
+                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/OilSandsDeposits.json",
                     "type": "map",
                     "scrollguard": true
                 }
@@ -75,7 +75,7 @@
                     "type": "text"
                 },
                 {
-                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/fr/OilSandsFacilityLocations2019.json",
+                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/OilSandsFacilityLocations2019.json",
                     "type": "map"
                 }
             ]
@@ -89,7 +89,7 @@
                     "type": "text"
                 },
                 {
-                    "images": [
+                    "items": [
                         {
                             "src": "00000000-0000-0000-0000-000000000000/assets/fr/substances/AuroraNorth_RelDisp_FR.PNG",
                             "type": "image"
@@ -130,50 +130,11 @@
             "panel": [
                 {
                     "title": "Substances de l'INRP déclarées par les installations d’exploitation minière de sables bitumineux",
-                    "content": "Sept installations d’exploitation minière à ciel ouvert de sables bitumineux ont fait l’objet d’une déclaration à l’INRP en 2019. Ces installations ont déclaré des renseignements sur 70 substances et groupes de substances différents pour 2019, représentant un total de 319 888 tonnes de polluants rejetés, éliminés et transférés. Près de 76% de cette quantité, soit 242 395 tonnes, provient des principaux contaminants atmosphériques (PCA) tels que les matières particulaires (MP), les oxydes d’azote (NO), le dioxyde de soufre (SO<sub>2</sub>), le monoxyde de carbone (CO) et les composés organiques volatils (COV). Les PCA sont des précurseurs du smog et contribuent à la mauvaise qualité de l’air.\n\nLes sept installations d’exploitation minière à ciel ouvert des sables bitumineux qui ont déclaré à l’INRP sont listées ci-dessous. Cliquez sur le nom des installations pour voir le détail de ce qu’elles ont déclaré.\n\n- Mine de la rivière Muskeg et mine Jackpine, et usine de transformation et mine Horizon  (Canadian Natural Resources);\n- Mine de sables bitumineux Fort Hills;\n- Usine de transformation et mine Kearl d’Imperial Oil;\n- Sables bitumineux de Suncor Energy Inc; et\n- Site de la mine Aurora nord de Syncrude Canada et site de la mine Syncrude Canada Ltd. (anciennement Mildred Lake).\n",
-                    "type": "text"
-                },
-                {
-                    "type": "chart",
-                    "charts": [
-                        {
-                            "src": "410b88da-0ed1-4749-903f-5e76c24e2e5f/charts/fr/substances/1.Imperial Oil Resources Limited-Kearl Oil Sands Processing Plant and Mine.csv",
-                            "options": {
-                                "title": "Usine de Transformation e Mine Kearl D'imperial 2019 Rejets et Éliminations (tonnes)",
-                                "subtitle": "",
-                                "type": "pie"
-                            }
-                        },
-                        {
-                            "src": "410b88da-0ed1-4749-903f-5e76c24e2e5f/charts/fr/substances/2.Suncor Energy Oil Sands Limited Partnership-Suncor Energy Inc. Oil Sands.csv",
-                            "options": {
-                                "title": "Sables bitumineux de Suncor Energy Inc. 2019 Rejets et Éliminations (tonnes)",
-                                "subtitle": "",
-                                "type": "pie"
-                            }
-                        },
-                        {
-                            "src": "410b88da-0ed1-4749-903f-5e76c24e2e5f/charts/fr/substances/3.Syncrude Canada Ltd.-Syncrude Canada Ltd.csv",
-                            "options": {
-                                "title": "Site de la Mine Syncrude Canada Ltd. 2019 Rejets et Éliminations (tonnes)",
-                                "subtitle": "",
-                                "type": "pie"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "title": "Substances de l'INRP déclarées par les installations d’exploitation minière de sables bitumineux",
-            "panel": [
-                {
-                    "title": "Substances de l'INRP déclarées par les installations d’exploitation minière de sables bitumineux",
                     "content": "Pour plus d’information sur l’utilisation et l’interprétation des données de l’INRP, veuillez consulter notre [guide](https://www.canada.ca/fr/environnement-changement-climatique/services/inventaire-national-rejets-polluants/utilisation-interpretation-donnees.html).\n\nIl est à noter que même si la mine de la rivière Muskeg et la mine Jackpine sont des mines autonomes, aux fins des déclarations à l’INRP, Canadian Natural Resources déclare les renseignements les concernant comme une seule installation.\n\nIl peut être difficile de faire des comparaisons directes entre ces installations. Bien qu’elles participent toutes à l’extraction et à la transformation du bitume, leurs activités n’en diffèrent pas moins. Certaines installations, comme les mines Kearl et Fort Hills, sont essentiellement des mines et ne valorisent pas leur bitume sur place. Les rejets déclarés de ces installations comptent en général une proportion beaucoup plus importante de matières particulaires. Les installations qui ont des installations de valorisation sur place déclarent généralement de plus grandes quantités de rejets de dioxyde de soufre (SO<sub>2</sub>).\n\nExplorez chaque installation avec l’imagerie par satellite.",
                     "type": "text"
                 },
                 {
-                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/en/ReleasesandDisposalsbyMiningFacilitiesin2019(satellite).json",
+                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/ReleasesandDisposalsbyMiningFacilitiesin2019(satellite).json",
                     "type": "map"
                 }
             ]
@@ -215,7 +176,7 @@
                     "type": "text"
                 },
                 {
-                    "images": [
+                    "items": [
                         {
                             "src": "00000000-0000-0000-0000-000000000000/assets/fr/tailings/AuroraNorth_Tailings_FR.PNG",
                             "type": "image"
@@ -260,7 +221,7 @@
                     "type": "text"
                 },
                 {
-                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/fr/ReleasesandDisposalsbyMiningFacilitiesin2019(satellite).json",
+                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/ReleasesandDisposalsbyMiningFacilitiesin2019(satellite).json",
                     "type": "map"
                 }
             ]
@@ -274,7 +235,7 @@
                     "type": "text"
                 },
                 {
-                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/en/TailingsfromMiningFacilities2010to2019(timeslider).json",
+                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/TailingsfromMiningFacilities2010to2019(timeslider).json",
                     "type": "map"
                 }
             ]
@@ -302,7 +263,7 @@
                     "type": "text"
                 },
                 {
-                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/fr/ReleasestoAirbyInSituFacilitiesforAllSubstancesin2019.json",
+                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/ReleasestoAirbyInSituFacilitiesforAllSubstancesin2019.json",
                     "type": "map"
                 }
             ]
@@ -316,7 +277,7 @@
                     "type": "text"
                 },
                 {
-                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/fr/ReleasestoAirbyInSituFacilitiesforAllSubstances2010to2019(timeslider).json",
+                    "config": "00000000-0000-0000-0000-000000000000/ramp-config/ReleasestoAirbyInSituFacilitiesforAllSubstances2010to2019(timeslider).json",
                     "type": "map"
                 }
             ]
@@ -348,10 +309,106 @@
                     "type": "image"
                 }
             ]
+        },
+        {
+            "title": "Graphique",
+            "panel": [
+                {
+                    "type": "slideshow",
+                    "items": [
+                        {
+                            "type": "chart",
+                            "src": "00000000-0000-0000-0000-000000000000/charts/en/chartConfig.json"
+                        },
+                        {
+                            "type": "chart",
+                            "src": "00000000-0000-0000-0000-000000000000/charts/en/hybridChartConfig.json"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "tableOfContents": [
+        {
+            "title": "Apercu",
+            "slideIndex": 0,
+            "sublist": [
+                {
+                    "title": "Gisements de sables bitumineux",
+                    "slideIndex": 1
+                }
+            ]
+        },
+        {
+            "title": "Extraction de sables bitumineux",
+            "slideIndex": 2
+        },
+        {
+            "title": "Substances de l'INRP déclarées par les installations d’exploitation minière de sables bitumineux",
+            "slideIndex": 5,
+            "sublist": [
+                {
+                    "title": "Substances de l'INRP déclarées par les installations d’exploitation minière de sables bitumineux MAP",
+                    "slideIndex": 6
+                },
+                {
+                    "title": "Rejets de principaux contaminants atmosphériques de mines de sables bitumineux",
+                    "slideIndex": 7
+                },
+                {
+                    "title": "Résidus miniers déclarés par les installations d’exploitation minière à ciel ouvert des sables bitumineux",
+                    "slideIndex": 8
+                },
+                {
+                    "title": "Résidus miniers déclarés à l’INRP par les installations d’exploitation minière à ciel ouvert de sables bitumineux",
+                    "slideIndex": 9
+                },
+                {
+                    "title": "Résidus miniers déclarés à l’INRP par les installations d’exploitation minière à ciel ouvert de sables bitumineux MAP",
+                    "slideIndex": 10
+                }
+            ]
+        },
+        {
+            "title": "Tendances dans les résidus miniers déclarés par les installations d’exploitation minière à ciel ouvert",
+            "slideIndex": 11
+        },
+        {
+            "title": "Installations in situ",
+            "slideIndex": 12,
+            "sublist": [
+                {
+                    "title": "Rejets à l’air déclarés par les installations in situ",
+                    "slideIndex": 13
+                },
+                {
+                    "title": "Tendances entourant les substances déclarées à l’INRP par les installations in situ",
+                    "slideIndex": 14
+                },
+                {
+                    "title": "Rejets à l’air déclarés à l’INRP par les installations in situ",
+                    "slideIndex": 15
+                },
+                {
+                    "title": "Gestion des répercussions sur l’environnement",
+                    "slideIndex": 16
+                }
+            ]
+        },
+        {
+            "title": "Finale",
+            "slideIndex": 17
         }
     ],
     "contextLink": "https://www.canada.ca/en/environment-climate-change/services/national-pollutant-release-inventory/tools-resources-data/exploredata.html",
     "contextLabel": "Explore National Pollutant Release Inventory data",
     "lang": "en",
+    "breadcrumbs": [
+        {
+            "title": "[FR] Test Breadcrumb",
+            "href": "https://google.ca"
+        }
+    ],
     "dateModified": "2022-02-14"
 }
